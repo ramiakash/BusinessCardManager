@@ -1,0 +1,342 @@
+<div class="max-w-6xl p-4 mx-auto md:p-8 bg-gray-50 min-h-screen">
+  <div
+    class="flex flex-col items-start justify-between mb-6 md:flex-row md:items-center"
+  >
+    <h1 class="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:mb-0">
+      My Business Cards
+    </h1>
+
+    <div class="flex flex-wrap gap-2">
+      <a
+        routerLink="import"
+        class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-blue-700 transition-colors bg-blue-100 rounded-md shadow-sm hover:bg-blue-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9.25 13.5a.75.75 0 001.5 0V4.636l2.952 3.129a.75.75 0 001.096-1.03l-4.25-4.5a.75.75 0 00-1.096 0l-4.25 4.5a.75.75 0 101.096 1.03L9.25 4.636V13.5z"
+            clip-rule="evenodd"
+          />
+          <path
+            d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"
+          />
+        </svg>
+        Import
+      </a>
+      <button
+        (click)="onExport('csv')"
+        class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-green-700 transition-colors bg-green-100 rounded-md shadow-sm hover:bg-green-200"
+      >
+        Export CSV
+      </button>
+      <button
+        (click)="onExport('xml')"
+        class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-indigo-700 transition-colors bg-indigo-100 rounded-md shadow-sm hover:bg-indigo-200"
+      >
+        Export XML
+      </button>
+      <a
+        routerLink="new"
+        class="inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium text-white transition-all bg-blue-600 rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"
+          />
+        </svg>
+        Add New Card
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="p-6 mb-6 bg-white border border-gray-100 rounded-lg shadow-lg"
+    [formGroup]="filterForm"
+  >
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-6">
+      <div class="lg:col-span-1">
+        <label
+          for="filter-name"
+          class="block text-xs font-semibold tracking-wider text-gray-700 uppercase"
+          >Name</label
+        >
+        <input
+          id="filter-name"
+          type="text"
+          formControlName="name"
+          placeholder="Search by name..."
+          class="w-full px-3 py-2 mt-1 text-sm transition-colors border-gray-300 rounded-md shadow-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+      <div class="lg:col-span-1">
+        <label
+          for="filter-email"
+          class="block text-xs font-semibold tracking-wider text-gray-700 uppercase"
+          >Email</label
+        >
+        <input
+          id="filter-email"
+          type="text"
+          formControlName="email"
+          placeholder="Search by email..."
+          class="w-full px-3 py-2 mt-1 text-sm transition-colors border-gray-300 rounded-md shadow-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+      <div class="lg:col-span-1">
+        <label
+          for="filter-phone"
+          class="block text-xs font-semibold tracking-wider text-gray-700 uppercase"
+          >Phone</label
+        >
+        <input
+          id="filter-phone"
+          type="text"
+          formControlName="phone"
+          placeholder="Search by phone..."
+          class="w-full px-3 py-2 mt-1 text-sm transition-colors border-gray-300 rounded-md shadow-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+      <div class="lg:col-span-1">
+        <label
+          for="filter-gender"
+          class="block text-xs font-semibold tracking-wider text-gray-700 uppercase"
+          >Gender</label
+        >
+        <select
+          id="filter-gender"
+          formControlName="gender"
+          class="w-full px-3 py-2 mt-1 text-sm transition-colors border-gray-300 rounded-md shadow-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div class="lg:col-span-1">
+        <label
+          for="filter-dob"
+          class="block text-xs font-semibold tracking-wider text-gray-700 uppercase"
+          >Date of Birth</label
+        >
+        <input
+          id="filter-dob"
+          type="date"
+          formControlName="dateOfBirth"
+          class="w-full px-3 py-2 mt-1 text-sm transition-colors border-gray-300 rounded-md shadow-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+      <div class="flex items-end lg:col-span-1">
+        <button
+          (click)="onResetFilters()"
+          class="inline-flex items-center justify-center w-full gap-2 px-3 py-2 mt-1 text-sm font-medium text-gray-700 transition-colors bg-gray-100 border border-gray-300 rounded-md shadow-sm hover:bg-red-50 hover:text-red-700 hover:border-red-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M15.323 15.323a.75.75 0 01-1.06 0L10 11.06l-4.263 4.264a.75.75 0 11-1.06-1.06L8.94 10 4.677 5.737a.75.75 0 111.06-1.06L10 8.94l4.263-4.263a.75.75 0 111.06 1.06L11.06 10l4.263 4.263a.75.75 0 010 1.06z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="cards$ | async as cards; else loading">
+    <div
+      *ngIf="cards.length > 0; else emptyState"
+      class="grid grid-cols-1 gap-6 md:grid-cols-2"
+    >
+      <div
+        *ngFor="let card of cards"
+        class="relative flex p-4 overflow-hidden bg-white border border-gray-100 rounded-lg shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1"
+      >
+        <div class="mr-5 shrink-0">
+          <img
+            class="object-cover w-28 h-28 bg-gray-200 rounded-lg shadow-md"
+            [src]="
+              card.photoBase64
+                ? 'data:image/jpeg;base64,' + card.photoBase64
+                : 'assets/placeholder-avatar.png'
+            "
+            alt="Profile Photo"
+          />
+        </div>
+
+        <div class="grow">
+          <h3 class="text-xl font-semibold text-gray-900">{{ card.name }}</h3>
+          <div class="mt-2 space-y-1.5">
+            <p class="flex items-center gap-2 text-sm text-gray-700">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-5 h-5 text-gray-400"
+              >
+                <path
+                  d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"
+                />
+                <path
+                  d="M19 8.839l-7.447 3.724a.25.25 0 01-.226 0L4 8.839V14a2 2 0 002 2h10a2 2 0 002-2V8.839z"
+                />
+              </svg>
+              {{ card.email }}
+            </p>
+            <p class="flex items-center gap-2 text-sm text-gray-700">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-5 h-5 text-gray-400"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              {{ card.phone }}
+            </p>
+            <p class="flex items-start gap-2 pt-1 text-sm text-gray-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-5 h-5 text-gray-400 shrink-0 mt-0.5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.757.433.62.62 0 00.28.14l.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              {{ card.address }}
+            </p>
+            <p class="flex items-center gap-2 pt-1 text-xs text-gray-400">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-5 h-5 text-gray-400"
+              >
+                <path
+                  d="M8.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM3 10a7 7 0 1114 0 7 7 0 01-14 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              DOB: {{ card.dateOfBirth | date : "longDate" }}
+            </p>
+          </div>
+        </div>
+
+        <div class="absolute shrink-0 top-2 right-2">
+          <button
+            (click)="onDelete(card.id)"
+            class="p-1.5 text-gray-400 transition-colors rounded-full hover:text-red-600 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
+            <span class="sr-only">Delete card</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12.54 0c-.34-.059-.68-.114-1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyState>
+      <div
+        class="py-16 text-center bg-white border border-gray-100 rounded-lg shadow-lg"
+      >
+        <svg
+          class="w-16 h-16 mx-auto text-gray-300"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+          />
+        </svg>
+
+        <h3 class="mt-2 text-xl font-semibold text-gray-900">
+          No business cards found
+        </h3>
+        <p class="mt-1 text-gray-500" *ngIf="filterForm.pristine">
+          Get started by adding a new card!
+        </p>
+        <p class="mt-1 text-gray-500" *ngIf="!filterForm.pristine">
+          Try adjusting your filters or
+          <button
+            (click)="onResetFilters()"
+            class="font-medium text-blue-600 hover:text-blue-500"
+          >
+            reset them</button
+          >.
+        </p>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <div class="py-24 text-center">
+      <svg
+        class="w-10 h-10 mx-auto text-blue-600 animate-spin"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+      <p class="mt-4 text-lg font-medium text-gray-700">
+        Loading business cards...
+      </p>
+    </div>
+  </ng-template>
+</div>
